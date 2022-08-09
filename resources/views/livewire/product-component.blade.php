@@ -36,6 +36,9 @@
             </div>
         </div>
         <div class="col-md-4">
+            <div class="container">
+                @include("livewire.$view")
+            </div>
         </div>
     </div>
 </div>
