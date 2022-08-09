@@ -1,6 +1,27 @@
 <div>
     <div class="row">
         <div class="col-md-8">
+
+            @if(isset($success_text) || isset($error_text))
+                <div class="mt-3">
+                    @if(isset($success_text))
+                        <div class="alert alert-success" role="alert">
+                            {{ $success_text }}
+                        </div>
+                    @endif
+
+                    @if(isset($error_text))
+                        <div class="alert alert-danger" role="alert">
+                            {{ $error_text }}
+                        </div>
+                    @endif
+                </div>
+            @endif
+
+            <div class="mt-3">
+                <button class="btn btn-primary" wire:click="create">Nuevo producto</button>
+            </div>
+
             <div class="mt-2 table-responsive-md">
                 <table class="table table-striped">
                     <thead>
@@ -23,7 +44,7 @@
                                 <td>{{ $product->quantity }}</td>
                                 <td>${{ $product->price }} MXN</td>
                                 <td>
-                                    <button type="button" class="btn btn-success">Editar</button>
+                                    <button type="button" class="btn btn-success" wire:click='edit({{ $product }})'>Editar</button>
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-danger" wire:click='destroy({{ $product }})'>Borrar</button>
@@ -36,9 +57,11 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="container">
-                @include("livewire.$view")
-            </div>
+            @if(isset($view))
+                <div class="container">
+                    @include("livewire.$view")
+                </div>
+            @endif
         </div>
     </div>
 </div>
